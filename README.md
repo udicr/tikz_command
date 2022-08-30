@@ -4,4 +4,4 @@ compiles a tikz file (.tex file only consisting of a block \begin{tikzpicture}..
 as a standalone .tex document
 
 Usage:
-tikz <filename>.tex
+tikz plugin_filename.tex
