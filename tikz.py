@@ -6,7 +6,7 @@ def help():
     print("Help information")
 
 def wrapper(content, additional_packages=None, resize_box = None):
-    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz}",r"\begin{document}", *content, r"\end{document}"]
+    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz,pgfplots}",r"\begin{document}", *content, r"\end{document}"]
     return lines
 
 def read_content(file):
@@ -23,11 +23,11 @@ def write_tmp(content):
 def pdflatex_tmp():
     subprocess.call(["pdflatex","tmp.tex"])
 
-def okular_tmp():
+def okular():
     subprocess.call(["okular","tmp.pdf"])
 
-def mv_pdf(abs_path):
-    subprocess.call(["mv","tmp.pdf",abs_path.strip()+"/tmp.pdf"])
+def mv_pdf(abs_path,tmp_name):
+    subprocess.call(["mv","tmp.pdf",abs_path.strip()+f"/{tmp_name}.pdf"])
 
 def delete_tmp():
     subprocess.call(["rm","tmp.tex","tmp.aux","tmp.log"])
@@ -39,6 +39,7 @@ if __name__ == '__main__':
     else:
         try:
             filename = sys.argv[1]
+            tmp_name = sys.argv[1][:-4]
             abs_path = sys.stdin.read()
             print(abs_path)
             with open(filename,'r') as file:
@@ -47,8 +48,8 @@ if __name__ == '__main__':
             touch_tmp()
             write_tmp(wrapped)
             pdflatex_tmp()
-            #mv_pdf(abs_path)
-            okular_tmp()
+            okular()
+            mv_pdf(abs_path, tmp_name)
             delete_tmp()
         except FileNotFoundError as e:
             print(e)
