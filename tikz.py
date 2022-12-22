@@ -6,7 +6,7 @@ def help():
     print("Help information")
 
 def wrapper(content, additional_packages=None, resize_box = None):
-    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz,pgfplots}",r"\begin{document}", *content, r"\end{document}"]
+    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz,pgfplots}",r"\usepgfplotslibrary{fillbetween}",r"\usetikzlibrary{patterns,patterns.meta,intersections,decorations.markings,arrows,fadings,matrix}",r" \usepackage{bm}",r"\pgfplotsset{compat=1.16}",r"\begin{document}", *content, r"\end{document}"]
     return lines
 
 def read_content(file):
@@ -48,7 +48,7 @@ if __name__ == '__main__':
             touch_tmp()
             write_tmp(wrapped)
             pdflatex_tmp()
-            okular()
+            #okular()
             mv_pdf(abs_path, tmp_name)
             delete_tmp()
         except FileNotFoundError as e:
