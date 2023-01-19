@@ -1,10 +1,8 @@
 # tikz_command
 
 compiles a tikz (.tex or .tikz) file as a standalone document
-(.tex file only consisting of a block 
-\begin{tikzpicture}...\end{tikzpicture})
 
-
+___________________________
 
 bash-alias (add line at ~/.bashrc)
 
