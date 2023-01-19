@@ -8,7 +8,7 @@ compiles a tikz file as a standalone .tex document
 
 bash-alias (add line at ~/.bashrc)
 
-alias tikz='pwd | python3 /home/user/Workspace/tikz_command/tikz.py'
+alias tikz='pwd | python3 YOUR_GLOBAL_PATH_TO_THE_FILE/tikz.py'
 
 
 Usage:
