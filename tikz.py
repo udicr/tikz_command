@@ -6,7 +6,7 @@ def help():
     print("Help information")
 
 def wrapper(content, additional_packages=None, resize_box = None):
-    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz,pgfplots}",r"\usepgfplotslibrary{fillbetween}",r"\usetikzlibrary{patterns,patterns.meta,intersections,decorations.markings,arrows,fadings,matrix}",r" \usepackage{bm}",r"\pgfplotsset{compat=1.16}",r"\begin{document}", *content, r"\end{document}"]
+    lines = [r"\documentclass[crop,tikz]{standalone}",r"\usepackage{tikz,pgfplots}",r"\usepackage{amsmath, amsfonts}",r"\usepgfplotslibrary{fillbetween}",r"\usetikzlibrary{patterns,patterns.meta,intersections,decorations.markings,arrows,fadings,matrix}",r" \usepackage{bm}",r"\pgfplotsset{compat=1.16}",r"\begin{document}", *content, r"\end{document}"]
     return lines
 
 def read_content(file):
@@ -39,7 +39,12 @@ if __name__ == '__main__':
     else:
         try:
             filename = sys.argv[1]
-            tmp_name = sys.argv[1][:-4]
+            if sys.argv[1][-4:] == ".tex":
+                tmp_name = sys.argv[1][:-4]
+            elif sys.argv[1][-4:] == "tikz":
+                tmp_name = sys.argv[1][:-5]
+            else:
+                raise TypeError("need a .tex or a .tikz file")
             abs_path = sys.stdin.read()
             print(abs_path)
             with open(filename,'r') as file:
