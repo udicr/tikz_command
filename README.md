@@ -1,6 +1,6 @@
 # tikz_command
 
-compiles a tikz file as a standalone .tex document
+compiles a tikz (.tex or .tikz) file as a standalone document
 (.tex file only consisting of a block 
 \begin{tikzpicture}...\end{tikzpicture})
 
